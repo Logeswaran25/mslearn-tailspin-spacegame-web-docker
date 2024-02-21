@@ -13,11 +13,11 @@ stages:
   - job: 'Build'
     displayName: 'Build job'
     pool:
-      name: 'MyAgentPool'
+      vmImage: 'ubuntu-20.04'
       demands:
       - npm
 
-    
+
 
     steps:
     - task: Docker@2
@@ -31,7 +31,6 @@ stages:
         tags: |
           $(tag)
 
-
 - stage: 'Deploy'
   displayName: 'Deploy the container'
   dependsOn: Build
@@ -39,7 +38,7 @@ stages:
   - job: 'Deploy'
     displayName: 'Deploy job'
     pool:
-      name: 'MyAgentPool'
+      vmImage: 'ubuntu-20.04'
     variables:
     - group: Release
     steps:
